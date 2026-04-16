@@ -3,152 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ahmed_snde | Cyber Portfolio</title>
+    <title>@ahmed_snde | Terminal OS</title>
     <style>
         :root {
-            --neon-blue: #00f3ff;
-            --neon-pink: #ff00ff;
-            --dark-bg: #050505;
+            --neon-cyan: #00f3ff;
+            --neon-magenta: #ff00ff;
+            --terminal-green: #00ff41;
+            --dark-core: #0a0a0b;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            background-color: var(--dark-bg);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-core);
+            color: var(--neon-cyan);
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Matrix/Hacking Background Effect */
-        body::before {
-            content: "";
+        /* Matrix Overlay */
+        .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+            z-index: 100;
         }
 
         .container {
             width: 90%;
-            max-width: 400px;
-            text-align: center;
-            padding: 20px;
+            max-width: 500px;
+            padding: 40px 20px;
+            z-index: 10;
         }
 
-        /* Profile Section */
+        /* Profile Header */
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
         .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid var(--neon-blue);
-            box-shadow: 0 0 15px var(--neon-blue);
-            margin-bottom: 15px;
-            object-fit: cover;
+            width: 120px;
+            height: 120px;
+            border: 2px solid var(--neon-magenta);
+            padding: 5px;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0% 30%);
+            box-shadow: 0 0 20px var(--neon-magenta);
         }
 
         h1 {
-            font-size: 1.5rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
-            margin: 10px 0;
-        }
-
-        .bio {
-            font-size: 0.9rem;
-            color: #ccc;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        /* Glitch Effect Text */
-        .glitch {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Buttons / Links */
-        .link-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--neon-pink);
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-            display: block;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-        }
-
-        .link-card:hover {
-            background: var(--neon-pink);
-            color: black;
-            box-shadow: 0 0 20px var(--neon-pink);
-            transform: scale(1.05);
-        }
-
-        .link-card::before {
-            content: "> ";
-            color: var(--neon-blue);
-        }
-
-        /* Status Bar */
-        .status-bar {
-            margin-top: 40px;
-            font-size: 10px;
-            color: var(--neon-blue);
+            font-size: 1.8rem;
             text-transform: uppercase;
-            opacity: 0.6;
+            letter-spacing: 4px;
+            margin: 10px 0;
+            color: white;
+            text-shadow: 2px 2px var(--neon-magenta), -2px -2px var(--neon-cyan);
         }
 
-        /* Animation */
-        @keyframes scanline {
-            0% { bottom: 100%; }
-            100% { bottom: 0%; }
+        .typing-text {
+            border-left: 2px solid var(--neon-cyan);
+            padding-left: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 40px;
+            color: var(--terminal-green);
         }
 
-        .scanline {
+        /* Cyber Buttons */
+        .cyber-link {
+            display: block;
+            margin: 20px 0;
+            padding: 15px;
+            text-decoration: none;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            background: rgba(0, 243, 255, 0.05);
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            clip-path: polygon(5% 0, 100% 0, 100% 70%, 95% 100%, 0 100%, 0% 30%);
+            transition: all 0.3s ease;
+        }
+
+        .cyber-link:hover {
+            background: var(--neon-cyan);
+            color: black;
+            box-shadow: 0 0 30px var(--neon-cyan);
+            transform: translateX(-5px);
+        }
+
+        .cyber-link::after {
+            content: " [CONNECTED]";
+            font-size: 10px;
+            opacity: 0;
+        }
+
+        .cyber-link:hover::after {
+            opacity: 1;
+        }
+
+        /* Live HUD Elements */
+        .hud-box {
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 10px;
+            margin-top: 30px;
+            font-size: 11px;
+            text-align: left;
+            position: relative;
+        }
+
+        .loading-bar {
             width: 100%;
-            height: 2px;
-            background: rgba(0, 243, 255, 0.2);
-            position: fixed;
-            animation: scanline 4s linear infinite;
-            z-index: 10;
+            height: 4px;
+            background: #222;
+            margin-top: 5px;
+        }
+
+        .loading-progress {
+            width: 75%;
+            height: 100%;
+            background: var(--neon-magenta);
+            box-shadow: 0 0 10px var(--neon-magenta);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* Glitch Effect on Click */
+        .cyber-link:active {
+            filter: hue-rotate(90deg);
         }
     </style>
 </head>
 <body>
 
-    <div class="scanline"></div>
+    <div class="overlay"></div>
 
     <div class="container">
-        <img src="https://via.placeholder.com/150/00f3ff/000000?text=AS" alt="Ahmed Snde" class="profile-img">
-        
-        <h1 class="glitch">@ahmed_snde</h1>
-        <p class="bio">SYSTEM_DEVELOPER | CYBER_SECURITY | PROGRAMMING</p>
+        <div class="profile-wrapper">
+            <img src="https://via.placeholder.com/150/0a0a0b/ff00ff?text=AHMED" alt="Ahmed Snde" class="profile-img">
+        </div>
 
-        <a href="https://t.me/ahmed_snde" class="link-card" target="_blank">TELEGRAM CHANNEL</a>
-        <a href="https://github.com/ahmed_snde" class="link-card" target="_blank">GITHUB REPOSITORY</a>
-        <a href="#" class="link-card">MY PROJECTS</a>
-        <a href="mailto:contact@ahmed.snde" class="link-card">HIRE ME / CONTACT</a>
+        <h1>@ahmed_snde</h1>
+        <div class="typing-text">> ACCESSING_SECURE_NODE... SUCCESS.</div>
 
-        <div class="status-bar">
-            SYSTEM STATUS: ONLINE <br>
-            ENCRYPTION: ACTIVE (AES-256) <br>
-            LOC: ZAKHO, DUHOK
+        <a href="https://t.me/ahmed_snde" class="cyber-link">TELEGRAM_CHANNEL</a>
+        <a href="https://github.com/ahmedsnde" class="cyber-link">SOURCE_CODE_DATA</a>
+        <a href="#" class="cyber-link">ACTIVE_PROJECTS_V4</a>
+        <a href="mailto:ahmed@snde.com" class="cyber-link">ESTABLISH_COMMUNICATION</a>
+
+        <div class="hud-box">
+            <span style="color: var(--neon-magenta);">[CPU_LOAD]</span> 42% 
+            <div class="loading-bar"><div class="loading-progress" style="width: 42%;"></div></div>
+            <br>
+            <span style="color: var(--neon-magenta);">[MEMORY]</span> 12.4GB / 32GB
+            <div class="loading-bar"><div class="loading-progress" style="width: 60%; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan);"></div></div>
+            <br>
+            <span style="color: var(--terminal-green);">STATUS: SYSTEM_STABLE_V4.0</span>
         </div>
     </div>
 
+    <script>
+        // Simple Interaction logic
+        console.log("Welcome Ahmed. System initialised.");
+    </script>
 </body>
 </html>
