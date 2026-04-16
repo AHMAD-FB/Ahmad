@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ahmed_snde | Cyber Portfolio</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #050505;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Matrix/Hacking Background Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Profile Section */
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin: 10px 0;
+        }
+
+        .bio {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* Glitch Effect Text */
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Buttons / Links */
+        .link-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--neon-pink);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            display: block;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .link-card:hover {
+            background: var(--neon-pink);
+            color: black;
+            box-shadow: 0 0 20px var(--neon-pink);
+            transform: scale(1.05);
+        }
+
+        .link-card::before {
+            content: "> ";
+            color: var(--neon-blue);
+        }
+
+        /* Status Bar */
+        .status-bar {
+            margin-top: 40px;
+            font-size: 10px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        /* Animation */
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: 0%; }
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 243, 255, 0.2);
+            position: fixed;
+            animation: scanline 4s linear infinite;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanline"></div>
+
+    <div class="container">
+        <img src="https://via.placeholder.com/150/00f3ff/000000?text=AS" alt="Ahmed Snde" class="profile-img">
+        
+        <h1 class="glitch">@ahmed_snde</h1>
+        <p class="bio">SYSTEM_DEVELOPER | CYBER_SECURITY | PROGRAMMING</p>
+
+        <a href="https://t.me/ahmed_snde" class="link-card" target="_blank">TELEGRAM CHANNEL</a>
+        <a href="https://github.com/ahmed_snde" class="link-card" target="_blank">GITHUB REPOSITORY</a>
+        <a href="#" class="link-card">MY PROJECTS</a>
+        <a href="mailto:contact@ahmed.snde" class="link-card">HIRE ME / CONTACT</a>
+
+        <div class="status-bar">
+            SYSTEM STATUS: ONLINE <br>
+            ENCRYPTION: ACTIVE (AES-256) <br>
+            LOC: ZAKHO, DUHOK
+        </div>
+    </div>
+
+</body>
+</html>
