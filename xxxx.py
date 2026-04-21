@@ -1,8 +1,8 @@
-import requests
-import json
-
 def check_with_gemini(text_input):
-    # کلیل و لینک ل ناڤ فۆنکشنێ بن دا تووشی ئیرۆرا 'not defined' نەبی
+    # هەمی import کان ل ڤێرە دانە دا تووشی ئیرۆرا 'not defined' نەبی
+    import requests
+    import json
+
     API_KEY = "AIzaSyDPXHVFMbItSRgVpXdVLvdcvM546Jie4yY"
     api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key={API_KEY}"
     
@@ -17,20 +17,18 @@ def check_with_gemini(text_input):
 
     try:
         response = requests.post(api_url, headers=headers, data=json.dumps(data))
-        result = response.json()
-        
         if response.status_code == 200:
-            answer = result['candidates'][0]['content']['parts'][0]['text'].strip().upper()
-            return answer
+            result = response.json()
+            return result['candidates'][0]['content']['parts'][0]['text'].strip().upper()
         else:
-            return f"Error: {result.get('error', {}).get('message', 'Unknown Error')}"
+            return f"Error: {response.status_code}"
     except Exception as e:
         return f"Exception: {str(e)}"
 
-# تاقیکرن
+# ئەڤ بەشە دێ مینیت وەک خۆ
 print("--- Gemini 3.1 Moderator ---")
 while True:
     user_text = input("\nنڤیسینێ بنڤیسە: ")
-    if user_text.lower() in ['exit', 'قەپات']: break
+    if user_text.lower() in ['exit', 'quit']: break
     if not user_text: continue
     print(f"Result: {check_with_gemini(user_text)}")
