@@ -3,7 +3,7 @@ def check_with_gemini(text_input):
     import requests
     import json
 
-    API_KEY = "AIzaSyDPXHVFMbItSRgVpXdVLvdcvM546Jie4yY"
+    API_KEY = "AIzaSyD57guGwVbPtoeDlaqdVs4IXx9TsSKbNo4"
     api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key={API_KEY}"
     
     headers = {'Content-Type': 'application/json'}
