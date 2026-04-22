@@ -2,7 +2,7 @@ import os, subprocess, threading, time, telebot, requests
 from flask import Flask
 
 # ئەڤ بەشە دێ ژ ژینگەها سیستەمی هێتە وەرگرتن
-TOKEN = "6697645670:AAEd4NHwNdmNc2wXz_0jKjCc_-DoBmfkoqw"
+TOKEN = "6490953211:AAG46z-nHEyf-OYydcLk4yU_bQBmWqqDLCk"
 OWNER_ID = 6231439063
 bot = telebot.TeleBot(TOKEN)
 
